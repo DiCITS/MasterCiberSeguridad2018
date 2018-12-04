@@ -22,7 +22,7 @@ In this section you can consult the cluster structure to be used in the subject.
 Two servers will be accessed:
 
 - ```betatun.ugr.es```
-- ```atc.ugr.es```
+- ```atcstack.ugr.es```
 
 To access the clusters it is necessary to use SSH, if you use Windows, you will need the SSH Putty application or if you use Linux, the ssh command is already integrated.
 
@@ -59,8 +59,8 @@ Each user has 5 ports within the range ```153XXX```. The rank assigned to each u
 
 To access the services, depending on the service we will use the corresponding application. For example, if it is a web service that has been installed/published in port 15367, to see the service, we can see it in the browser: ```http://bahia.ugr.es:15367/``` and this will redirect traffic to the service that is running in that port inside ```betatun.ugr.es```.
 
-Table with port assignment:
-, ,,,,,,,,,
+Table with port assignment (container external ports, container internal IP, VM external port, etc.):
+
 
 | 	User      | betatun.ugr.es  | atcstack.ugr.es | betatun.ugr.es  | atcstack.ugr.es|
 |-------------|-----------------|-----------------|-----------------|----------------|
