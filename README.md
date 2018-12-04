@@ -18,17 +18,9 @@ This is the repository for:
 This  course contains:
 
 - [Architecture and start-up of the training work environment.](./Practice/architecture.md)
-- [Starting with LDAP commands](./LDAP/starting_ldap.md)
 - [Starting with Docker containers](./Docker/starting_docker.md)
-- [Starting with OpenNebula](./OpenNebula/starting_OpenNebula.md)
-- [Setup OpenLDAP TLS/SSL]()
-- [Setup freeIPA]()
-- [SELinux]()
-
-Practice (updated):
-
-- [Deploy App PHP container connect to LDAP Server ](./Practice/session1/container_phpldap.md)
-- [Deploy LDAP Server in your VM (opennebula)](./Practice/session1/virtualmachine_ldap_opennebula.md)
+- [Starting with OpenStack](./OpenStack/starting_OpenStack.md)
+- [Starting with LDAP commands](./LDAP/starting_ldap.md)
 
 
 Extras:
