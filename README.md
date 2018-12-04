@@ -23,7 +23,3 @@ This  course contains:
 - [Starting with LDAP commands](./LDAP/starting_ldap.md)
 
 
-Extras:
-
-- [MongoDB](./MongoDB/starting_mongodb.md)
-
