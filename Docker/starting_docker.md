@@ -297,7 +297,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 ```
 
 
-## Download a image of docker container:
+## Download a image of docker container
 
 ``docker pull``
 
