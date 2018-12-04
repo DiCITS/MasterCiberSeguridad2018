@@ -263,7 +263,9 @@ In addition each container can export several ports:
 docker run -d -p 12000:80 -p 12001:81  --ip "IP_ASSIGNED" --privileged=true --restart always --name "NAME_CONT" --net "dockernet02" <CONTAINER>
 ```
 
-# Review of docker commands
+
+## Review of docker commands
+
 
 ## Show docker Images
 
