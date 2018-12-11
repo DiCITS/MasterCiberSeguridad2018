@@ -19,6 +19,7 @@ This  course contains:
 
 - [Architecture and start-up of the training work environment.](./Practice/architecture.md)
 - [Starting with Docker containers](./Docker/starting_docker.md)
+- [Starting with Cloud Computing Services (Azure)](./Azure/starting_azure.md)
 - [Starting with OpenStack](./OpenStack/starting_openstack.md)
 - [Starting with LDAP commands](./LDAP/starting_ldap.md)
 
