@@ -1,7 +1,7 @@
 
 ## Schema of the practice
 
-![LDAPstruct](../imgs/practice_ldap)
+![LDAPstruct](../imgs/practice_ldap.jpg)
 
 Objetives:
 
