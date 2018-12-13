@@ -148,7 +148,7 @@ ldapsearch -H ldap://localhost -LL -b ou=Users,dc=openstack,dc=org -x
 Is it not working?. Those are the parameters:
 
 - We are using BETATUN.UGR.ES as server of LDAP
-- If you are connected BETATUN.UGR.ES, use localhost
+- If you are connected BETATUN.UGR.ES, use localhost. If you are connected outside of BETATUN.UGR.ES, use betatun.ugr.es
 - Port by default: 389 -> LDAP  and 986 -> SLDAP
 - BETATUN.UGR.ES contains LDAP service running locally and externally at port number 15040 (LDAP, no SLDAP).
 
@@ -262,7 +262,7 @@ Please check: https://www.centos.org/docs/5/html/CDS/cli/8.0/Configuration_Comma
 Now, try out:
 
 ```
-ldapsearch -H ldap://localhost -LL -b ou=Users,dc=openstack,dc=org -x
+ldapsearch -H ldap://localhost:15040 -LL -b ou=Users,dc=openstack,dc=org -x
 ```
 
 It returns LDAP directory with the last user added.
@@ -343,7 +343,7 @@ Now, check changes:
 
 
 ```
-ldapsearch -H ldap://localhost -LL -b ou=Users,dc=openstack,dc=org -x
+ldapsearch -H ldap://localhost:15040 -LL -b ou=Users,dc=openstack,dc=org -x
 ```
 
 And finally delete description. Create a new file i.e. ``manu_del_descr.ldif``
@@ -363,7 +363,7 @@ ldapmodify -x -D "cn=admin,dc=openstack,dc=org" -w password -H ldap:// -f manu_d
 Now, check out:
 
 ```
-ldapsearch -H ldap://localhost -LL -b ou=Users,dc=openstack,dc=org -x
+ldapsearch -H ldap://localhost:15040 -LL -b ou=Users,dc=openstack,dc=org -x
 ```
 
 Verify if entity description is not set.
@@ -392,7 +392,7 @@ ldapadd -x -D cn=admin,dc=openstack,dc=org -w password -c -f add_new_ou.ldif
 For instance, if we use ``ou=People``
 
 ```
-ldapsearch -H ldap://localhost -LL -b ou=People,dc=openstack,dc=org -x
+ldapsearch -H ldap://localhost:15040 -LL -b ou=People,dc=openstack,dc=org -x
 ```
 
 It shows everything under ``ou=People`` from ``dc=openstack,dc=org``
