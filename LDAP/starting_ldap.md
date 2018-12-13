@@ -132,11 +132,39 @@ These are often used for the general categories under the top-level DIT entry, t
 
 ### Starting: check if everything is okay
 
+This is the schema of port and services in BETATUN.UGR.ES:
+
+
+
+![LDAPstruct](../imgs/schema_ldap_betatun)
+
+
 First, with your user account (logged) try out:
 
 ```
 ldapsearch -H ldap://localhost -LL -b ou=Users,dc=openstack,dc=org -x
 ```
+
+Is it not working?. Those are the parameters:
+
+- We are using BETATUN.UGR.ES as server of LDAP
+- If you are connected BETATUN.UGR.ES, use localhost
+- Port by default: 389 -> LDAP  and 986 -> SLDAP
+- BETATUN.UGR.ES contains LDAP service running locally and externally at port number 15040 (LDAP, no SLDAP).
+
+So, how to connect from external node:
+
+```
+ldapsearch -H ldap://betatun.ugr.es:15040 -LL -b ou=Users,dc=openstack,dc=org -x
+```
+
+How to connect from internal BETATUN.UGR.es:
+
+```
+ldapsearch -H ldap://localhost:15040 -LL -b ou=Users,dc=openstack,dc=org -x
+```
+
+
 
 This command returns the list of LDAP users (something similar):
 
