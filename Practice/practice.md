@@ -3,7 +3,10 @@
 
 ![LDAPstruct](../imgs/practice_ldap.jpg)
 
-Objetives:
+
+**Objective**:
+
+Create an environment consisting of an MV (S1) in a cloud service containing an LDAP service installed and a container in Betatun.ugr.es (S2) containing a container with a web+php service that includes a web form to authenticate users against S1's LDAP service.
 
 
 
