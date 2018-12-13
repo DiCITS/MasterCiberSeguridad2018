@@ -22,5 +22,6 @@ This  course contains:
 - [Starting with Cloud Computing Services (Azure)](./Azure/starting_azure.md)
 - [Starting with OpenStack](./OpenStack/starting_openstack.md)
 - [Starting with LDAP commands](./LDAP/starting_ldap.md)
+- [Practice with LDAP + Docker + MVs](./Practice/practice.md)
 
 
