@@ -125,6 +125,11 @@ The parents of this entry derived from the ``openstack.org``  domain name, which
 These are often used for the general categories under the top-level DIT entry, things like ```ou=people, ou=groups, and ou=inventory``` are common.
 
 
+- [Schema of the practice](#schema-of-the-practice)
+- [1.1 Install OpenLDAP Service (as docker container) on Azure Virtual Machine with CENTOS.](#11-install-openldap-service--as-docker-container--on-azure-virtual-machine-with-centos)
+- [1.2 Install OpenLDAP Service on Azure Virtual Machine with CENTOS.](#12-install-openldap-service-on-azure-virtual-machine-with-centos)
+- [2. Create LDAP client application in PHP](#create-ldap-client-application-in-php)
+
 ### Structure of the LDAP example
 
 ![LDAPstruct](https://sites.google.com/site/manuparra/home/Untitled.png)
