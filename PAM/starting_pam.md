@@ -236,8 +236,247 @@ Y además debes ir al Panel de control de las MV desde el Dashboard de Azure par
 - Add InBound RULE.
 - Añade las reglas para los dos puertos que hay que abrir.
 
+## Verificación de la instalación
+
+Para ello, debes instalar en la VM ```ldapserver``` y ```ldapclient``` el paquete de utilidades de LDAP:
+
+```
+yum -y install openldap-clients nss-pam-ldapd
+```
+
+Conecta con ```ldapserver``` por ssh y ejecuta el comando de busqueda en el directorio LDAP:
+
+```
+ldapsearch .....
+```
+
+Haz lo mismo en ```ldapclient```, pero usa como ```HOST``` la IP externa del servidor de LDAP ```ldapserver```.
+
+```
+ldapsearch -H <IP de ldapserver>
+```
+
+Para el caso de que esta segunda conexión al servicio de LDAP NO  funcione, probablemente no has abierto los puertos de forma correcta.
+
+## Instalación y configuración de PAM + LDAP access en Ubuntu
+
+Install client packages on ```ldapclient```
+
+```
+sudo apt-get update
+sudo apt-get install libpam-ldap nscd
+```
+
+And follow the next questions:
+
+````
+LDAP server Uniform Resource Identifier: ldap://LDAP-server-IP-Address
+
+Change the initial string from "ldapi:///" to "ldap://" before inputing your server's information
+Distinguished name of the search base:
+
+   This should match the value you put in your LDAP service
+   
+   Our example was "dc=ugr,dc=es"
+
+LDAP version to use: 3
+
+Make local root Database admin: Yes
+
+Does the LDAP database require login? No
+
+LDAP account for root:
+
+   This should also match the value in your LDAP SERVER
+   Our example was "cn=Manager,dc=ugr,dc=es"
+
+LDAP root account password: Your-LDAP-root-password
+````
+
+if you make a mistake:
+
+```
+sudo dpkg-reconfigure ldap-auth-config
+```
+
+Edit ``/etc/nsswitch.conf``
+
+```
+passwd:         ldap compat
+group:          ldap compat
+shadow:         ldap compat
+```
+
+Edit ``/etc/pam.d/common-session``
+
+Add to the bottom:
+
+```
+session required    pam_mkhomedir.so skel=/etc/skel umask=0022
+```
+
+And then:
+
+```
+/etc/init.d/nscd restart
+```
+
+**Now we should verify the PAM configuration**:
+
+Edit file ``/etc/pam.d/common-auth``
+
+```
+vi /etc/pam.d/common-auth
+```
+
+It must to contain:
+
+```
+...
+auth    [success=2 default=ignore]      pam_unix.so nullok_secure try_first_pass
+auth    [success=1 default=ignore]      pam_ldap.so use_first_pass
+...
+auth    requisite                       pam_deny.so
+...
+auth    required                        pam_permit.so
+...
+```
+
+Edit file ``/etc/pam.d/common-account``
+
+```
+vi /etc/pam.d/common-account
+```
+
+```
+...
+account [success=2 new_authtok_reqd=done default=ignore]        pam_unix.so
+account [success=1 default=ignore]      pam_ldap.so
+...
+account requisite                       pam_deny.so
+...
+account required                        pam_permit.so
+...
+```
+
+Edit file  ``/etc/pam.d/common-password``,
+
+```
+vi /etc/pam.d/common-password
+```
+
+```
+...
+password        [success=2 default=ignore]      pam_unix.so obscure sha512
+password        [success=1 user_unknown=ignore default=die]     pam_ldap.so use_authtok try_first_pass
+...
+password        requisite                       pam_deny.so
+...
+password        required                        pam_permit.so
+...
+```
+
+Edit ``/etc/pam.d/common-session``
+
+```
+vi /etc/pam.d/common-session
+```
+
+```
+...
+session  required                                         pam_mkhomedir.so
+...
+```
+
+It will create a HOME directory for LDAP users who does not have home directory when login to LDAP server.
+
+Edit file ``/etc/pam.d/common-session-noninteractive``
 
 
+```
+vi /etc/pam.d/common-session-noninteractive,
+```
 
+```
+...
+session [default=1]                     pam_permit.so
+...
+session requisite                       pam_deny.so
+...
+session required                        pam_permit.so
+...
+session required        pam_unix.so
+session optional                        pam_ldap.so
+```
+
+
+Restart nscd service:
+
+```
+/etc/init.d/nscd restart
+```
+
+
+Try login in with ssh:
+
+```
+ssh  myuser@IP
+```
+
+
+## Instalación y configuración de PAM + LDAP access en CentOS
+
+Install the next packages:
+
+```
+yum install -y openldap-clients nss-pam-ldapd
+```
+
+or 
+
+```
+yum group install "Directory Client"
+```
+
+Follow the next steps: 
+
+```
+yum install authconfig
+```
+
+```
+authconfig --enableldap --enableldapauth --ldapserver='ldap://LDAPServer' --ldapbasedn='dc=ugr,dc=es' --enablemkhomedir --enableshadow --enablelocauthorize --passalgo=sha256 --update
+```
+
+If Pluggable Authentication Module (PAM) for LDAP is missing. You can find out what package provides this command with:
+
+```
+yum install pam_ldap
+```
+
+and
+
+``
+authconfig --test
+``
+
+
+Pay attention to are the “LDAP server” and the “LDAP base DN” lines, making sure they match with your LDAP server.
+
+Finally:
+
+
+```
+yum install nss-pam-ldapd
+chkconfig nslcd on
+service nslcd start
+```
+
+Name Service Switch (NSS) allows your LDAP server to provide user account, group, host name, alias, netgroup, etc. It also provides a Pluggable Authentication Module (PAM) to do authentication to an LDAP server based on the configuration of the nsswitch file.
+
+
+```
+ssh myuser@IP
+```
 
 
