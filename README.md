@@ -23,5 +23,6 @@ This  course contains:
 - [Starting with OpenStack](./OpenStack/starting_openstack.md)
 - [Starting with LDAP commands](./LDAP/starting_ldap.md)
 - [Practice with LDAP + Docker + MVs](./Practice/practice.md)
+- [Practice with LDAP + PAM (Pluggable Auth Modules) + MVs](./PAM/starting_pam.md)
 
 
