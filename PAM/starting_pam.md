@@ -17,6 +17,11 @@ Tabla de contenido:
     + [If Firewalld is running, allow LDAP service. LDAP uses 389/TCP.](#if-firewalld-is-running--allow-ldap-service-ldap-uses-389-tcp)
     + [Open Port in Azure](#open-port-in-azure)
   * [Verificación de la instalación](#verificaci-n-de-la-instalaci-n)
+  * [Breve información sobre PAM](#breve-informaci-n-sobre-pam)
+    + [**Grupos de gestión**](#--grupos-de-gesti-n--)
+    + [**Banderas de control**](#--banderas-de-control--)
+    + [**Orden de los módulos**](#--orden-de-los-m-dulos--)
+    + [Modulos](#modulos)
   * [Instalación y configuración de PAM + LDAP access en Ubuntu](#instalaci-n-y-configuraci-n-de-pam---ldap-access-en-ubuntu)
   * [Instalación y configuración de PAM + LDAP access en CentOS](#instalaci-n-y-configuraci-n-de-pam---ldap-access-en-centos)
 
@@ -274,7 +279,124 @@ ldapsearch -H <IP de ldapserver>
 
 Para el caso de que esta segunda conexión al servicio de LDAP NO  funcione, probablemente no has abierto los puertos de forma correcta.
 
+## Breve información sobre PAM
+
+Los cuatro tipos de servicios PAM:
+
+- Módulos de servicio de autenticación.
+- Módulos de administración de cuentas.
+- Módulos de gestión de sesiones.
+- Módulos de gestión de contraseñas.
+
+Cualquier aplicación que requiere autenticación puede registrarse en PAM utilizando un nombre de servicio. Puedes listar los servicios de Linux que usan Linux-PAM de la siguiente forma:
+
+```
+ls /etc/pam.d/
+```
+
+Si abres un archivo de servicio, verás que está dividido en tres columnas. La primera columna es el grupo de administración, la segunda columna es para las banderas de control y la tercera columna es el módulo (por lo tanto, el archivo) utilizado.
+
+```
+cat /etc/pam.d/sshd
+...
+account    required     pam_nologin.so
+...
+
+```
+
+La cuenta es el grupo de administración, required es la bandera de control y el módulo utilizado es ```pam_nologin.so```. Se puede observar una cuarta columna que es para los parámetros del módulo.
+
+### **Grupos de gestión** 
+
+Hay cuatro grupos de administración que verás en los archivos de servicios de PAM:
+
+- GrupoAuth: puede validar usuarios
+- Grupo Account: controla el acceso al servicio, por ejemplo, cuántas veces deberías un servicio determinado.
+- Grupo Session: responsable del entorno de servicio.
+- Grupo Password: se utilizar para la actualización de contraseñas.
+
+### **Banderas de control**
+
+Hay cuatro banderas de control en los archivos de servicios:
+
+- Requisite: la bandera de más precedencia.Si el requisito no se encuentra o no se puede cargar, dejará de cargar otros módulos y retornará un error.
+- Required: lo mismo que el requisite, pero si el módulo no se pudo cargar por algún motivo, continúa cargando otros módulos y retorna el error al final de la ejecución.
+- Sufficient: si el módulo retorna éxito, el procesamiento de otros módulos ya no es necesario.
+- Optional: en caso de falla, la pila de módulos continúa la ejecución y el código de retorno se ignora
+
+### **Orden de los módulos**
+
+El orden es importante porque cada módulo depende del módulo anterior en la pila.
+
+Si intentas una configuración como la siguiente para iniciar sesión:
+
+
+```
+auth required pam_unix.so
+auth optional pam_deny.so
+```
+Funcionará correctamente, pero ¿qué pasará si cambiamos el orden de esta manera?
+
+```
+auth optional pam_deny.so
+auth required pam_unix.so
+```
+Nadie puede iniciar sesión, por lo que el orden importa.
+
+### Modulos
+
+**Módulo pam_succeed_if**
+
+Este módulo permite el acceso a grupos especificados. Puedes validar cuentas de usuario de esta manera:
+
+```auth required pam_succeed_if.so gid=1000,2000```
+
+La línea anterior indica que solo los usuarios en el grupo cuyo ID este entre 1000 o 2000 pueden iniciar sesión.
+
+Puedes usar uid como id de usuario.
+
+```auth requisite pam_succeed_if.so uid >= 1000```
+
+En este ejemplo, cualquier id de usuario mayor o igual a 1000 puede iniciar sesión.
+
+**Módulo pam_access**
+
+Este módulo funciona como el módulo pam_succeed_if, excepto que el módulo pam_access verifica el registro de los hosts en red, mientras que al módulo pam_succeed_if no le importa.
+
+**Módulo pam_deny**
+
+Este módulo se usa para restringir el acceso. Siempre devolverá un no OK.
+
+Puedes usarlo al final de tu pila de módulos para protegerte de cualquier configuración incorrecta.
+
+**Módulo pam_unix**
+
+Este módulo se utiliza para verificar las credenciales del usuario contra el archivo ```/etc/shadow```.
+
+```auth required pam_unix.so```
+
+**Módulo pam_mysql**
+
+En lugar de verificar las credenciales del usuario contra ```/etc/shadow```, puedes usar una base de datos MySQL como back-end utilizando el módulo pam_mysql.
+
+Se puede usar como se muestra a continuación:
+
+```
+auth sufficient pam_mysql.so user=myuser passwd=mypassword host=localhost db=mydb table=users usercolumn=username passwdcolumn=password
+```
+
+**pam_cracklib module**
+
+Las contraseñas seguras son imprescindibles en estos días. Este módulo garantiza que usarás contraseñas seguras.
+
+```password required pam_cracklib.so retry=4 minlen=12 difok=6```
+
+Este ejemplo se asegura que la longitud de la contraseña = 12 y cuatro veces para elegir una contraseña, de lo contrario, saldrá.
+
+
+
 ## Instalación y configuración de PAM + LDAP access en Ubuntu
+
 
 Install client packages on ```ldapclient```
 
