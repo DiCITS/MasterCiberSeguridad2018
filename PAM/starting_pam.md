@@ -4,6 +4,22 @@
 Manuel Parra (manuelparra@decsai.ugr.es) & José Manuel Benítez (j.m.benitez@decsai.ugr.es), December 2016
 ![DICITSlogo](http://sci2s.ugr.es/dicits/images/dicits.png)
 
+Tabla de contenido:
+
+  * [Crear MVs desde Microsoft Azure](#crear-mvs-desde-microsoft-azure)
+  * [Asignar nombre de servidor a cada VM](#asignar-nombre-de-servidor-a-cada-vm)
+  * [Instalar el servicio de LDAP en la VM Servidor](#instalar-el-servicio-de-ldap-en-la-vm-servidor)
+    + [Set OpenLDAP admin password.](#set-openldap-admin-password)
+    + [Add data to ldiff file:](#add-data-to-ldiff-file-)
+    + [Save data for admin user:](#save-data-for-admin-user-)
+    + [Import basic Schemas](#import-basic-schemas)
+    + [Set your domain name on LDAP DB.](#set-your-domain-name-on-ldap-db)
+    + [If Firewalld is running, allow LDAP service. LDAP uses 389/TCP.](#if-firewalld-is-running--allow-ldap-service-ldap-uses-389-tcp)
+    + [Open Port in Azure](#open-port-in-azure)
+  * [Verificación de la instalación](#verificaci-n-de-la-instalaci-n)
+  * [Instalación y configuración de PAM + LDAP access en Ubuntu](#instalaci-n-y-configuraci-n-de-pam---ldap-access-en-ubuntu)
+  * [Instalación y configuración de PAM + LDAP access en CentOS](#instalaci-n-y-configuraci-n-de-pam---ldap-access-en-centos)
+
 
 
 ## Crear MVs desde Microsoft Azure
