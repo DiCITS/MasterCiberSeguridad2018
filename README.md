@@ -26,5 +26,3 @@ This  course contains:
 - [SELinux](./SELINUX/starting_SELinux.md)
 - [Cloud Services: MongoDB](./MongoDB/starting_mongodb.md)
 - [Practice with LDAP + PAM (Pluggable Auth Modules) + MVs](./PAM/starting_pam.md)
-
-
