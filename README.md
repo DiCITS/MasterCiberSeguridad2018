@@ -25,5 +25,6 @@ This  course contains:
 - [Practice with LDAP + Docker + MVs](./Practice/practice.md)
 - [SELinux](./SELINUX/starting_SELinux.md)
 - [Cloud Services: MongoDB](./MongoDB/starting_mongodb.md)
+- [Practice with LDAP + PAM (Pluggable Auth Modules) + MVs](./PAM/starting_pam.md)
 
 
