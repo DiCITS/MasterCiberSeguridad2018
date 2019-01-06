@@ -51,7 +51,20 @@ SELinux provides confinement on an application if the application has been hacke
 SELinux allows different policies to be written that are interchangeable. The default policy in CentOS is the targeted policy which "targets" and confines selected system processes including httpd, named, dhcpd, mysqld, etc.
 
 
-# Installing SELinux
+# Practice Environment
+
+The following steps are mandatory in order to begin work on this practical part:
+
+- Start a Virtual Machine from the Microsoft Azure Account with CentOS:
+  - If you dont remember the process follow the next steps [Azure](https://github.com/DiCITS/MasterCiberSeguridad2018/blob/master/Azure/starting_azure.md).
+- Once created, access to the VM via SSH from the AZURE terminal.
+- Follow the next steps.
+
+
+# Installing SELinux for CentOS
+
+Probably already installed, but we add some additional packages:
+
 
 ```
 yum install policycoreutils policycoreutils-python selinux-policy selinux-policy-targeted libselinux-utils setroubleshoot-server setools setools-console mcstrans
