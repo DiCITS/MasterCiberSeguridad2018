@@ -193,13 +193,15 @@ The maximum BSON document size is **16 megabytes!**.
 * Regular expression − This datatype is used to store regular expression.
 
 
-# Starting with MongoDB
+# Starting with MongoDB (Practice)
 
 Log and connect to our system with:
 
 ```
-ssh manuparra@.........es
+ssh CS<yourID>@betatun.ugr.es
 ```
+
+Use your password for SSH in betatun.ugr.es
 
 First of all, check that you have access to the mongo tools system, try this command:
 
@@ -219,13 +221,16 @@ mongoimport   mongooplog    mongoperf     mongorestore  mongostat     mongotop
 The default port for mongodb and mongos instances is 27017. 
 You can change this port with port or --port when connect.
 
-Write:
+Write the next (change ID with your credentials; password is the same XX<ID>:
 
 ```
-mongo
+mongo -u "CS77777777G" -p "XX77777777G"  --authenticationDatabase "admin"
 ```
 
-It will connect with defaults parameters: ``localhost`` , port: ``27017`` and database: ``test``
+(change 77777777 by your ID)
+
+
+It will connect with defaults parameters: ``localhost`` , port: ``27017`` and database: ``admin``
 
 ```
 MongoDB shell version: 2.6.12
@@ -233,36 +238,18 @@ connecting to: test
 >
 ```
 
-Exit using ``CTRL+C`` or ``exit``
+In order to exit: ``CTRL+C`` or ``exit``
 
-Each user have an account on mongodb service. To connect:
-
-```
-mongo localhost:27017/manuparra -p 
-```
-
-It will us ``password``. 
-
-```
-mongo localhost:27017/manuparra -p mipasss 
-```
-
-
-MongoDB service is running locally in Docker systems, so, if you connect from docker containers or Virtual Machines, you must to use local docker system IP:
-
-```
-mongo 192.168.10.30:27017/manuparra -p mipasss 
-```
 
 ## Selecting/Creating/Deleting DataBase
 
 The command will create a new database if it doesn't exist, otherwise it will return the existing database.
 
 ```
-> use manuparra:
+> use YOURID:
 ```
 
-Now you are using ``manuparra`` database.
+Now you are using ``YOURID`` database.
 
 If you want to kwnow what database are you using:
 
@@ -297,13 +284,20 @@ where ``options`` is Optional and specify options about memory size and indexing
 Remember that firstly mongodb needs to kwnow what is the Database where it will create the Collection. Use ``show dbs`` and then ``use <your database>``.
 
 ```
-use manuparra;
+use <YOURID>;
 ```
 
 And then create the collection:
 
 ```
 db.createCollection("MyFirstCollection")
+```
+
+and another more:
+
+
+```
+db.createCollection("MySecondCollection")
 ```
 
 When created check:
@@ -551,6 +545,9 @@ AND:
 ```
 
 OR:
+
+```
+
 > db.MyFirstCollection.find(
    {
       $or: [
@@ -558,6 +555,8 @@ OR:
       ]
    }
 ).pretty()
+```
+
 
 Mixing up :
 
