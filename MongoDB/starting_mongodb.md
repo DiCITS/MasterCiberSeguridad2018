@@ -193,7 +193,7 @@ The maximum BSON document size is **16 megabytes!**.
 * Regular expression − This datatype is used to store regular expression.
 
 
-# Starting with MongoDB (Practice)
+# Starting with MongoDB
 
 Log and connect to our system ```betatun.ugr.es``` with your credentials (as usual):
 
