@@ -11,10 +11,10 @@ Manuel J. Parra Royón (manuelparra@decsai.ugr.es) & José. M. Benítez Sánchez
 Table of Contents
 =================
    
-   * [Using MongoDB, why? where? what?](#using-mongodb-why-where-what)
+   * [Using MongoDB, why? where? what? (Theory)](#using-mongodb-why-where-what)
       * [Documents instead row/cols](#documents-instead-rowcols)
-         * [Documents datatypes](#documents-datatypes)
-   * [Starting with MongoDB](#starting-with-mongodb)
+      * [Documents datatypes](#documents-datatypes)
+   * [Starting with MongoDB (Practice)](#starting-with-mongodb)
       * [Connecting with MongoDB Service:](#connecting-with-mongodb-service)
       * [Selecting/Creating/Deleting DataBase](#selectingcreatingdeleting-database)
       * [Selecting/Querying/Filtering](#selectingqueryingfiltering)
@@ -195,7 +195,7 @@ The maximum BSON document size is **16 megabytes!**.
 
 # Starting with MongoDB (Practice)
 
-Log and connect to our system with:
+Log and connect to our system ```betatun.ugr.es``` with your credentials (as usual):
 
 ```
 ssh CS<yourID>@betatun.ugr.es
@@ -218,10 +218,7 @@ mongoimport   mongooplog    mongoperf     mongorestore  mongostat     mongotop
 
 ## Connecting with MongoDB Service
 
-The default port for mongodb and mongos instances is 27017. 
-You can change this port with port or --port when connect.
-
-Write the next (change ID with your credentials; password is the same XX<ID>:
+Write the next (change ID with your credentials; password is the same XX<ID>):
 
 ```
 mongo -u "CS77777777G" -p "XX77777777G"  --authenticationDatabase "admin"
