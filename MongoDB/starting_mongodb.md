@@ -281,7 +281,7 @@ where ``options`` is Optional and specify options about memory size and indexing
 Remember that firstly mongodb needs to kwnow what is the Database where it will create the Collection. Use ``show dbs`` and then ``use <your database>``.
 
 ```
-use <YOURID>;
+use <YOURID>
 ```
 
 And then create the collection:
