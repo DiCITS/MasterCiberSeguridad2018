@@ -608,22 +608,22 @@ db.MyFirstCollection.remove({'country':'United States'})
 
 ## Import external data
 
-Download this dataset in your Docker Home (copy this link: http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv):
+Download this dataset your HOME (copy this link: https://raw.githubusercontent.com/DiCITS/MasterCiberSeguridad2018/master/MongoDB/convertcsv.csv):
 
-[DataSet](http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv) 7585 rows and 794 KB)
+[DataSet](https://raw.githubusercontent.com/DiCITS/MasterCiberSeguridad2018/master/MongoDB/convertcsv.csv) 7585 rows and 794 KB)
 
 Use the next command:
 
 ```
-curl -O http://samplecsvs.s3.amazonaws.com/SacramentocrimeJanuary2006.csv
+curl -O https://raw.githubusercontent.com/DiCITS/MasterCiberSeguridad2018/master/MongoDB/convertcsv.csv
 ```
 
-or download from [github](./datasetmongodb/SacramentocrimeJanuary2006.csv).
+or download from [github](https://raw.githubusercontent.com/DiCITS/MasterCiberSeguridad2018/master/MongoDB/convertcsv.csv).
 
 To import this file:
 
 ```
-mongoimport -d USERID -c <your collection> --type csv --file /tmp/SacramentocrimeJanuary2006.csv --headerline
+mongoimport -d USERID -c <your collection> --type csv --file convertcsv.csv --headerline
 ```
 
 Try out the next queries on your collection:
