@@ -608,11 +608,14 @@ db.MyFirstCollection.remove({'country':'United States'})
 
 ## Import external data
 
+
 Download this dataset your HOME (copy this link: https://raw.githubusercontent.com/DiCITS/MasterCiberSeguridad2018/master/MongoDB/convertcsv.csv):
 
 [DataSet](https://raw.githubusercontent.com/DiCITS/MasterCiberSeguridad2018/master/MongoDB/convertcsv.csv) 7585 rows and 794 KB)
 
-Use the next command:
+
+
+Use the next command (out of mongodb):
 
 ```
 curl -O https://raw.githubusercontent.com/DiCITS/MasterCiberSeguridad2018/master/MongoDB/convertcsv.csv
@@ -620,15 +623,63 @@ curl -O https://raw.githubusercontent.com/DiCITS/MasterCiberSeguridad2018/master
 
 or download from [github](https://raw.githubusercontent.com/DiCITS/MasterCiberSeguridad2018/master/MongoDB/convertcsv.csv).
 
-To import this file:
+To import this file (from shell) [Remember the path of the file you downloaded]:
 
 ```
 mongoimport -d USERID -c <your collection> --type csv --file convertcsv.csv --headerline
 ```
 
+Now, connect to mongo:
+
+```
+mongo
+```
+
+And use the your database:
+
+```
+use <YOURID>;
+```
+
+Check if collection is created and it have content:
+
+```
+show collections;
+```
+
+And list the content of the collection:
+
+```
+db.<your collection>.find();
+```
+
+It returns something like:
+
+```
+{ "_id" : ObjectId("5c3601e5144550c19ed16849"), "cdatetime;address;district;beat;grid;crimedescr;ucr_ncic_code;latitude;longitude" : "1/1/06 0:00;22 BECKFORD CT;6;6C        ;1443;476 PC PASS FICTICIOUS CHECK;2501;38.50677377;-121.4269508" }
+{ "_id" : ObjectId("5c3601e5144550c19ed1684a"), "cdatetime;address;district;beat;grid;crimedescr;ucr_ncic_code;latitude;longitude" : "1/1/06 0:00;3421 AUBURN BLVD;2;2A        ;508;459 PC  BURGLARY-UNSPECIFIED;2299;38.6374478;-121.3846125" }
+{ "_id" : ObjectId("5c3601e5144550c19ed1684b"), "cdatetime;address;district;beat;grid;crimedescr;ucr_ncic_code;latitude;longitude" : "1/1/06 0:00;4 PALEN CT;2;2A        ;212;10851(A)VC TAKE VEH W/O OWNER;2404;38.65784584;-121.4621009" }
+{ "_id" : ObjectId("5c3601e5144550c19ed1684c"), "cdatetime;address;district;beat;grid;crimedescr;ucr_ncic_code;latitude;longitude" : "1/1/06 0:00;2217 16TH AVE;4;4A        ;957;459 PC  BURGLARY VEHICLE;2299;38.537173;-121.4875774" }
+.......
+```
+
+### Praticing queries with MongoDB
+
 Try out the next queries on your collection:
 
-- Count number of thefts.
+- Count number of incidents of the collection:
+
+```
+db.<your collection>.count();
+```
+- Count number of incidens where ``ucr_ncic_code`` is ``7000`` (``ASSAULT WITH WEAPON - I RPT``) of the collection:
+
+```
+db.<your collection>.find(....)
+```
+
+
+
 - Count number of crimes per hour.
 
 
