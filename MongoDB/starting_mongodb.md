@@ -656,16 +656,16 @@ db.<your collection>.find();
 It returns something like:
 
 ```
-{ "_id" : ObjectId("5c3601e5144550c19ed16849"), "cdatetime;address;district;beat;grid;crimedescr;ucr_ncic_code;latitude;longitude" : "1/1/06 0:00;22 BECKFORD CT;6;6C        ;1443;476 PC PASS FICTICIOUS CHECK;2501;38.50677377;-121.4269508" }
-{ "_id" : ObjectId("5c3601e5144550c19ed1684a"), "cdatetime;address;district;beat;grid;crimedescr;ucr_ncic_code;latitude;longitude" : "1/1/06 0:00;3421 AUBURN BLVD;2;2A        ;508;459 PC  BURGLARY-UNSPECIFIED;2299;38.6374478;-121.3846125" }
-{ "_id" : ObjectId("5c3601e5144550c19ed1684b"), "cdatetime;address;district;beat;grid;crimedescr;ucr_ncic_code;latitude;longitude" : "1/1/06 0:00;4 PALEN CT;2;2A        ;212;10851(A)VC TAKE VEH W/O OWNER;2404;38.65784584;-121.4621009" }
-{ "_id" : ObjectId("5c3601e5144550c19ed1684c"), "cdatetime;address;district;beat;grid;crimedescr;ucr_ncic_code;latitude;longitude" : "1/1/06 0:00;2217 16TH AVE;4;4A        ;957;459 PC  BURGLARY VEHICLE;2299;38.537173;-121.4875774" }
+{ "_id" : ObjectId("5c360adc144550c19ed1c1a2"), "cdatetime" : "1/1/06 0:00", "address" : "3108 OCCIDENTAL DR", "district" : 3, "beat" : "3C", "grid" : 1115, "crimedescr" : "10851(A)VC TAKE VEH W/O OWNER", "ucr_ncic_code" : 2404, "latitude" : 38.55042047, "longitude" : -121.3914158 }
+{ "_id" : ObjectId("5c360adc144550c19ed1c1a3"), "cdatetime" : "1/1/06 0:00", "address" : "2082 EXPEDITION WAY", "district" : 5, "beat" : "5A", "grid" : 1512, "crimedescr" : "459 PC  BURGLARY RESIDENCE", "ucr_ncic_code" : 2204, "latitude" : 38.47350069, "longitude" : -121.4901858 }
+{ "_id" : ObjectId("5c360adc144550c19ed1c1a4"), "cdatetime" : "1/1/06 0:00", "address" : "22 BECKFORD CT", "district" : 6, "beat" : "6C", "grid" : 1443, "crimedescr" : "476 PC PASS FICTICIOUS CHECK", "ucr_ncic_code" : 2501, "latitude" : 38.50677377, "longitude" : -121.4269508 }
+{ "_id" : ObjectId("5c360adc144550c19ed1c1a5"), "cdatetime" : "1/1/06 0:00", "address" : "3421 AUBURN BLVD", "district" : 2, "beat" : "2A", "grid" : 508, "crimedescr" : "459 PC  BURGLARY-UNSPECIFIED", "ucr_ncic_code" : 2299, "latitude" : 38.6374478, "longitude" : -121.3846125 }
 .......
 ```
 
 ### Praticing queries with MongoDB
 
-Try out the next queries on your collection:
+Try out the next queries on your collection.
 
 - Count number of incidents of the collection:
 
@@ -675,12 +675,11 @@ db.<your collection>.count();
 - Count number of incidens where ``ucr_ncic_code`` is ``7000`` (``ASSAULT WITH WEAPON - I RPT``) of the collection:
 
 ```
-db.<your collection>.find(....)
+db.<your collection>.find({ ucr_ncic_code: { $eq: 7000 }}).count();
 ```
 
+- Count number of crimes per hour (for homework).
 
-
-- Count number of crimes per hour.
 
 
 ## MongoDB Clients
