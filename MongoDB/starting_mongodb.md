@@ -113,8 +113,6 @@ MongoDB stores data records as BSON documents.
 
 BSON is a binary representation of JSON documents, it contains more data types than JSON.
 
-![bsonchema](https://docs.mongodb.com/manual/_images/crud-annotated-document.png)
-
 MongoDB documents are composed of field-and-value pairs and have the following structure:
 
 ```
@@ -218,16 +216,14 @@ mongoimport   mongooplog    mongoperf     mongorestore  mongostat     mongotop
 
 ## Connecting with MongoDB Service
 
-Write the next (change ID with your credentials; password is the same XX<ID>):
+Write the next:
 
 ```
-mongo -u "CS77777777G" -p "XX77777777G"  --authenticationDatabase "admin"
+mongo 
 ```
 
-(change 77777777 by your ID)
 
-
-It will connect with defaults parameters: ``localhost`` , port: ``27017`` and database: ``admin``
+It will connect with defaults parameters: ``localhost`` , port: ``27017`` and database: ``default``
 
 ```
 MongoDB shell version: 2.6.12
@@ -243,7 +239,7 @@ In order to exit: ``CTRL+C`` or ``exit``
 The command will create a new database if it doesn't exist, otherwise it will return the existing database.
 
 ```
-> use YOURID:
+> use YOURID;
 ```
 
 Now you are using ``YOURID`` database.
