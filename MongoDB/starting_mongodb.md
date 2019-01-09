@@ -242,7 +242,7 @@ The command will create a new database if it doesn't exist, otherwise it will re
 > use YOURID;
 ```
 
-Now you are using ``YOURID`` database.
+Now you are using ``YOURID`` (``CC777777777N`` or your ID) database.
 
 If you want to kwnow what database are you using:
 
@@ -250,13 +250,7 @@ If you want to kwnow what database are you using:
 > db
 ```
 
-The ```command db.dropDatabase()`` is used to drop a existing database.
-
-DO NOT USE THIS COMMAND, WARNING:
-
-```
-db.dropDatabase()
-```
+The ```command db.dropDatabase()``` is used to drop a existing database.
 
 To kwnow the size of databases:
 
@@ -272,12 +266,12 @@ Basic syntax of createCollection() command is as follows:
 db.createCollection(name, options)
 ```
 
-where ``options`` is Optional and specify options about memory size and indexing.
+where ``options`` specifies options about memory size and indexing.
 
 Remember that firstly mongodb needs to kwnow what is the Database where it will create the Collection. Use ``show dbs`` and then ``use <your database>``.
 
 ```
-use <YOURID>
+use <YOURID>;
 ```
 
 And then create the collection:
@@ -287,7 +281,6 @@ db.createCollection("MyFirstCollection")
 ```
 
 and another more:
-
 
 ```
 db.createCollection("MySecondCollection")
@@ -299,7 +292,7 @@ When created check:
 show collections
 ```
 
-In MongoDB, you don't need to create the collection. MongoDB creates collection automatically, when you insert some document:
+In MongoDB, you don't need to create the collection. MongoDB creates collection automatically, when you insert some document (to ``MySecondCollection``):
 
 ```
 db.MySecondCollection.insert({"name" : "Manuel Parra"})
@@ -325,11 +318,13 @@ db.MySecondCollection.drop();
 
 To insert data into MongoDB collection, you need to use MongoDB's ``insert()`` or ``save()`` method.
 
+Example (do not write): 
+
 ```
 > db.MyFirstCollection.insert(<document>);
 ```
 
-Example of document: place 
+Example of document: a place.
 
 ```
 {    
@@ -355,7 +350,7 @@ Example of document: place
 }
 ```
 
-To insert:
+To insert in ``MongoDB`` to ``MyFirstCollection``:
 
 ```
 db.MyFirstCollection.insert(
@@ -383,13 +378,14 @@ db.MyFirstCollection.insert(
 );
 ```
 
-Check if document is stored:
+Check if document is stored using ``.find()`` function:
 
 ```
 > db.MyFirstCollection.find();
 ```
 
-Add multiple documents:
+
+Now you can add multiple documents in a variable (like ``Javascript`` and ``json``):
 
 ```
 	var places= [
@@ -438,12 +434,11 @@ Add multiple documents:
 	]
 ```
 
-and:
+and, now insert the variable ``places``:
 
 ```
 db.MyFirstCollection.insert(places)
 ```
-
 
 In the inserted document, if we don't specify the ``_id`` parameter, then MongoDB assigns a unique ObjectId for this document.
 You can override value `_id`, using your own ``_id``.
@@ -628,7 +623,7 @@ or download from [github](./datasetmongodb/SacramentocrimeJanuary2006.csv).
 To import this file:
 
 ```
-mongoimport -d manuparra -c <your collection> --type csv --file /tmp/SacramentocrimeJanuary2006.csv --headerline
+mongoimport -d USERID -c <your collection> --type csv --file /tmp/SacramentocrimeJanuary2006.csv --headerline
 ```
 
 Try out the next queries on your collection:
